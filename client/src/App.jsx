@@ -1,22 +1,40 @@
-import React, {useState, useEffect} from 'react';
-import axios from "axios"
-import { Registration } from './components/Registration';
-const App = () => {
-  const [members, setMembers] = useState([])
 
-  // useEffect(() => {
-  //   axios.get('/members')
-  //   .then(res => {
-  //     console.log(res.data.members)
-  //     setMembers(res.data.members)
-  //   }).catch(err => {
-  //     console.log(err)
-  //   })
-  // },[])
+import './App.css';
+import { Registration } from './components/LogAndReg/Registration';
+import {
+  BrowserRouter,
+  Switch,
+  Route
+} from "react-router-dom"
+import { LogAndRegView } from './views/LogAndRegView';
+import { Login } from './components/LogAndReg/Login';
+import { Dashboard } from './views/Dashboard';
+import { NavBar } from './views/NavBar';
+const App = () => {
+ 
+
   return (
-    <div>
-    <Registration/>
-    </div>
+    
+      <BrowserRouter >
+      <Switch>
+        <Route exact path='/'>
+        <NavBar>
+          <Dashboard/>
+        </NavBar>
+        </Route>
+        <Route exact path='/registration'>
+          <LogAndRegView>
+            <Registration/>
+          </LogAndRegView>
+        </Route>
+        <Route exact path='/login'>
+          <LogAndRegView>
+            <Login/>
+          </LogAndRegView>
+        </Route>
+      </Switch>
+      </BrowserRouter>
+    
   )
 };
 
