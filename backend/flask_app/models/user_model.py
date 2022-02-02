@@ -31,6 +31,7 @@ class User:
         return users
     @classmethod
     def add_user(cls,data):
+        print(data)
         user_data = {
                     'first_name':data['first_name'],
                     'last_name':data['last_name'],

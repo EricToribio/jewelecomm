@@ -39,6 +39,31 @@ def login():
     refresh_token=create_refresh_token(identity=user.id)
     
     return {"access_token":access_token,"refresh_token":refresh_token}
+
+@app.post('/api/google/login')
+@cross_origin()
+def google_login():
+    print(request.json)
+    user = user_model.User.get_one(email=request.json['email'])
+    if user:
+        access_token=create_access_token(identity=user.id)
+        refresh_token=create_refresh_token(identity=user.id)
+        return {"access_token":access_token,"refresh_token":refresh_token}
+    else:
+        data ={
+            'first_name':request.json['givenName'],
+            'last_name':request.json['familyName'],
+            'email':request.json['email'],
+            'password':request.json['googleId']
+        }    
+        new_user = user_model.User.add_user(data)
+        access_token=create_access_token(identity=new_user)
+        refresh_token=create_refresh_token(identity=new_user)
+        
+        return {"access_token":access_token,"refresh_token":refresh_token}
+
+    
+    return {"msg": "success"}
     
 
 @app.post('/api/register')
