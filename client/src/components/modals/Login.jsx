@@ -37,7 +37,7 @@ const Copyright = (props) => {
 // eslint-disable-next-line no-unused-vars
 const theme = createTheme();
 
-export default ({handleClose , setChangeUser}) => {
+export default ({handleClose ,setAuthTokens, setChangeUser, setUser}) => {
   const [errors, setErrors] = useState("");
   const [loginInfo, setLoginInfo] = useState({
     email: "",
@@ -45,10 +45,7 @@ export default ({handleClose , setChangeUser}) => {
   });
   const history = useHistory();
   const classes = useStyles();
-  let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ?
-  JSON.parse(localStorage.getItem('authTokens')) : null)
-let [user, setUser] = useState(() => localStorage.getItem('authTokens') ?
-  jwt_decode(localStorage.getItem('authTokens')) : null)
+  
   const logo = require('../static/img/toribio-ecommerce.png')
 
   const loginChangeHandler = (e) => {
@@ -74,30 +71,20 @@ let [user, setUser] = useState(() => localStorage.getItem('authTokens') ?
               alert('Invalid username or password')
           }
       })
-
-
-      //   if (res.data.message === "success!") {
-      //     setUser(res.data)
-      //     handleClose()
-      //   } else if (res.data.message) {
-      //     console.log(res.data.message)
-      //     setErrors(res.data)
-      //   }
-      // })
-      // .catch(err => console.log(err));
   };
 
   const googleSuccess = async (res) => {
     console.log(res.profileObj)
     axios.post('http://localhost:5000/api/google/login', res.profileObj)
       .then(res => {
+        handleClose()
         if (res.data) {
           setAuthTokens(res.data.access_token)
           setUser(jwt_decode(res.data.access_token))
           localStorage.setItem('authTokens', JSON.stringify(res))
           setChangeUser(res.data)
-          handleClose()
-          }
+        }
+        
       
       })
       .catch(err => console.log(err));
