@@ -7,6 +7,7 @@ import LoginModal from '../modals/LoginModal'
 
 import { MenuItem, Select } from '@mui/material';
 import { Grid } from '@material-ui/core';
+import { textTransform } from '@mui/system';
 export default ({ logout, changeUser, setChangeUser, setAuthTokens, setUser, user, refresh }) => {
   const history = useHistory()
 
@@ -22,7 +23,7 @@ export default ({ logout, changeUser, setChangeUser, setAuthTokens, setUser, use
 
 
   return (
-    <div className='mx-5 bg-white'>
+    <div className='nav-links'>
    
 
    
@@ -52,7 +53,7 @@ export default ({ logout, changeUser, setChangeUser, setAuthTokens, setUser, use
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               sx={{
-                
+                bgcolor:'text.light'  
               }}
               fullWidth
               label="Category"

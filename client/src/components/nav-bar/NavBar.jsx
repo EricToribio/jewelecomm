@@ -34,10 +34,16 @@ export const NavBar = ({ children }) => {
     return (
         <div >
             <Box sx={{bgcolor: '#252f38'  , px : 2, display : 'flex' ,alignItems :'center' , justifyContent: 'space-between' }}>
+                <div    >
+
                 <img className='logo' src={logo} alt="Toribio's Ecommerce" />
+                </div>
+                <div >
+
                 <NavLinks setAuthTokens={setAuthTokens} refresh={refresh}
                 logout={logout} setUser={setUser} user={user} changeUser={changeUser}
-                 setChangeUser={setChangeUser}/>
+                setChangeUser={setChangeUser}/>
+                </div>
             </Box>
 
             <div>
