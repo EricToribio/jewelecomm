@@ -1,4 +1,4 @@
-from flask import request,redirect,session,flash
+from flask import request,redirect,session,flash,jsonify
 # from flask_app.models import user_model#enter model name`
 from flask_app import app, bcrypt
 from flask_app.config.helper import new_user_validation
@@ -8,15 +8,16 @@ from flask_jwt_extended import (JWTManager,
 create_access_token,create_refresh_token,
 get_jwt_identity,
 jwt_required)
-@app.route('/api/logged/in')
+
+
+@app.post('/api/logged/in')
 @cross_origin()
 def logged_in (): 
-    # print(session['user_id']) 
-    # if 'user_id' in session:
-    #     print(session['user_id'])
-    #     return {"result" : "success"}
-    return {'error' : "Not Logged In"}
-
+    print(request.json)
+    
+    logged_in_user= user_model.User.get_one(id=request.json['sub'])
+    print(logged_in_user)
+    return {'user' : {'admin':logged_in_user.admin, 'firstName' : logged_in_user.first_name, 'lastName' : logged_in_user.last_name, 'email' : logged_in_user.email}}
 
 @app.route('/logout')
 # @login_required
@@ -48,6 +49,7 @@ def google_login():
     if user:
         access_token=create_access_token(identity=user.id)
         refresh_token=create_refresh_token(identity=user.id)
+        print(user)
         return {"access_token":access_token,"refresh_token":refresh_token}
     else:
         data ={

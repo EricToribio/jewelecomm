@@ -59,7 +59,7 @@ export default ({handleClose ,setAuthTokens, setChangeUser, setUser}) => {
     e.preventDefault();
     axios.post('http://localhost:5000/api/login', loginInfo)
       .then(res => {
-        console.log(res)
+        // console.log(res.data)
         if (res.data) {
           setAuthTokens(res.data.access_token)
           setUser(jwt_decode(res.data.access_token))
@@ -77,6 +77,7 @@ export default ({handleClose ,setAuthTokens, setChangeUser, setUser}) => {
     console.log(res.profileObj)
     axios.post('http://localhost:5000/api/google/login', res.profileObj)
       .then(res => {
+        console.log(res.data);
         handleClose()
         if (res.data) {
           setAuthTokens(res.data.access_token)

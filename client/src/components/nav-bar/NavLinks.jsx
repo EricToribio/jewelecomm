@@ -4,11 +4,10 @@ import { Link, useHistory } from 'react-router-dom';
 import { Row } from '@mui-treasury/components/flex';
 import { FormControl, InputLabel } from '@mui/material';
 import LoginModal from '../modals/LoginModal'
-
 import { MenuItem, Select } from '@mui/material';
-import { Grid } from '@material-ui/core';
-import { textTransform } from '@mui/system';
-export default ({ logout, changeUser, setChangeUser, setAuthTokens, setUser, user, refresh }) => {
+import { Button } from '@material-ui/core';
+import { width } from '@mui/system';
+export default ({ logout, changeUser,loggedInUser, setChangeUser, setAuthTokens, setUser, user, refresh }) => {
   const history = useHistory()
 
   const buttonStyle = {
@@ -20,7 +19,7 @@ export default ({ logout, changeUser, setChangeUser, setAuthTokens, setUser, use
     fontWeight: 'bold'
   }
 
-
+  // console.log(user);
 
   return (
     <div className='nav-links'>
@@ -40,36 +39,46 @@ export default ({ logout, changeUser, setChangeUser, setAuthTokens, setUser, use
             </li>
           </ul>
           :
-          <FormControl
-          item xs={12}
-          // sx={{
-          //   color: 'white',
-          //   bgcolor : 'white'
-          // }}
-          fullWidth
-          >
-            <InputLabel id="demo-simple-select-label">Category</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              sx={{
-                bgcolor:'text.light'  
-              }}
-              fullWidth
-              label="Category"
-              name="category"
-              autoComplete="cuisine"
-              
+         
+            
+            <FormControl
+            item xs={12}
+           
+            fullWidth
             >
-              <MenuItem value="breakfast">Breakfast</MenuItem>
-              <MenuItem value="lunch">Lunch</MenuItem>
-              <MenuItem value="dinner">Dinner</MenuItem>
-              <MenuItem value="quick">Quick And Easy</MenuItem>
-              <MenuItem value="wineAndDine">Wine And Dine</MenuItem>
-              <MenuItem value="bakedGoods">Baked  Goods</MenuItem>
-            </Select>
-          </FormControl>
-
+              <InputLabel id="demo-simple-select-label">{loggedInUser.firstName}</InputLabel>
+              <Select
+                  MenuProps={{
+                    anchorOrigin: {
+                      vertical: "bottom",
+                      horizontal: "left"
+                    },
+                    transformOrigin: {
+                      vertical: "top",
+                      horizontal: "left"
+                    }
+                  }}
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                sx={{
+                  bgcolor:'white'
+                }}
+                fullWidth
+                label="Category"
+                name="category"
+                autoComplete="cuisine"
+            
+              >
+                <MenuItem LinkComponent='/edit'>Edit Account</MenuItem>
+                <MenuItem value="dinner">Dinner</MenuItem>
+                <MenuItem value="quick">Quick</MenuItem>
+                <MenuItem value="wineAndDine">Wine</MenuItem>
+                <MenuItem value="lunch">Returns</MenuItem>
+                <MenuItem value={logout}>Log Out</MenuItem>
+              </Select>
+            </FormControl>
+            
+          
 
         }
        

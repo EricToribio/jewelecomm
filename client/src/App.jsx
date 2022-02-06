@@ -8,7 +8,6 @@ import {
 } from "react-router-dom"
 
 import { Dashboard } from './views/Dashboard';
-import { NavBar } from './components/nav-bar/NavBar';
 const App = () => {
  
 
@@ -17,9 +16,7 @@ const App = () => {
       <BrowserRouter >
       <Switch>
         <Route exact path='/'>
-        <NavBar>
           <Dashboard/>
-        </NavBar>
         </Route>
         
       </Switch>
