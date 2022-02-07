@@ -17,7 +17,7 @@ def logged_in ():
     
     logged_in_user= user_model.User.get_one(id=request.json['sub'])
     print(logged_in_user)
-    return {'user' : {'admin':logged_in_user.admin, 'firstName' : logged_in_user.first_name, 'lastName' : logged_in_user.last_name, 'email' : logged_in_user.email}}
+    return {'user' : {'id' : logged_in_user.id, 'admin' : logged_in_user.admin, 'firstName' : logged_in_user.first_name, 'lastName' : logged_in_user.last_name, 'email' : logged_in_user.email}}
 
 @app.route('/logout')
 # @login_required

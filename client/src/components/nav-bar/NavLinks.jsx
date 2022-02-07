@@ -18,6 +18,12 @@ export default ({ logout, changeUser,loggedInUser, setChangeUser, setAuthTokens,
     color: '#fff',
     fontWeight: 'bold'
   }
+  const onChangeHandler = (val) => {
+    val === 'logout' ?
+    logout()
+    :
+    history.push(`/${val}`)
+  }
 
   // console.log(user);
 
@@ -48,6 +54,7 @@ export default ({ logout, changeUser,loggedInUser, setChangeUser, setAuthTokens,
             >
               <InputLabel id="demo-simple-select-label">{loggedInUser.firstName}</InputLabel>
               <Select
+              onChange={(e) => onChangeHandler(e.target.value)}
                   MenuProps={{
                     anchorOrigin: {
                       vertical: "bottom",
@@ -69,12 +76,12 @@ export default ({ logout, changeUser,loggedInUser, setChangeUser, setAuthTokens,
                 autoComplete="cuisine"
             
               >
-                <MenuItem LinkComponent='/edit'>Edit Account</MenuItem>
+                <MenuItem value={`edit/${loggedInUser.firstName}`}>Edit Account</MenuItem>
                 <MenuItem value="dinner">Dinner</MenuItem>
                 <MenuItem value="quick">Quick</MenuItem>
                 <MenuItem value="wineAndDine">Wine</MenuItem>
-                <MenuItem value="lunch">Returns</MenuItem>
-                <MenuItem value={logout}>Log Out</MenuItem>
+                <MenuItem value='returns'>Returns</MenuItem>
+                <MenuItem value='logout'>Log Out</MenuItem>
               </Select>
             </FormControl>
             
