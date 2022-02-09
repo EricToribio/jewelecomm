@@ -19,7 +19,7 @@ export default ({ logout, changeUser,loggedInUser, setChangeUser, setAuthTokens,
     fontWeight: 'bold'
   }
 
-  // console.log(user);
+  console.log(loggedInUser);
 
   return (
     <div className='nav-links'>

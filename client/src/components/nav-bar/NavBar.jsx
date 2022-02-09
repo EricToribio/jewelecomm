@@ -8,25 +8,8 @@ import NavLinks from './NavLinks';
 import { Button, Grid } from '@material-ui/core';
 
 export const NavBar = ({setAuthTokens,loggedInUser, logout, changeUser,setUser,user,setChangeUser }) => {
-    // const [changeUser, setChangeUser] = useState()
     const logo = require('../static/img/toribio-ecommerce.png')
-    // let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ?
-    //     JSON.parse(localStorage.getItem('authTokens')) : null)
-    // const [user, setUser] = useState('')
-    // useEffect(() => {
-    //     setUser(localStorage.getItem('authTokens') ?
-    //     jwt_decode(localStorage.getItem('authTokens')) :'')
-        
-    // }, [changeUser]);
-    
-   
-
-    // let logout = () => {
-    //     setAuthTokens(null)
-    //     setUser('')
-    //     localStorage.removeItem('authTokens')
-    //     history.push('/')
-    // }
+ 
 
     return (
         <div >
