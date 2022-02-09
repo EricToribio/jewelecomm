@@ -1,11 +1,11 @@
-/* eslint-disable import/no-anonymous-default-export */
 import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
-import Login from './Login';
+import Register from './Register';
+import { capitalize, MenuItem } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -19,27 +19,17 @@ const style = {
   p: 4,
 };
 
-export default function TransitionsModal({ changeUser,setUser, setChangeUser, setAuthTokens}) {
+export default function TransitionsModal({setUser}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
- 
-  const buttonStyle = {
-    ':hover': {
-      bgcolor: '#ef5350', // theme.palette.primary.main
-      color: 'white',
-    },
-    color: '#fff',
-    fontWeight: 'bold'
-  }
 
   return (
     <div>
-      <Button onClick={handleOpen}
-        sx={buttonStyle}
-      >
-        Log In
-      </Button>
+       <MenuItem 
+      onClick={handleOpen}>
+        Edit Account
+      </MenuItem>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -53,16 +43,11 @@ export default function TransitionsModal({ changeUser,setUser, setChangeUser, se
       >
         <Fade in={open}>
           <Box sx={style}>
-            {/* ENTER LOGIN HERE */}
-            <Login 
-            setUser={setUser}
-            setChangeUser={setChangeUser}
-            setAuthTokens={setAuthTokens}
-             handleClose={handleClose} 
-            />
-          </Box>
-        </Fade>
-      </Modal>
-    </div>
+            {/* ENTER REGISTER HERE */}
+            <Register handleClose={handleClose} setUser={setUser}/>
+          </Box >
+        </Fade >
+      </Modal >
+    </div >
   );
 }

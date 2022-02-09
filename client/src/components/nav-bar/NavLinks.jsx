@@ -1,12 +1,12 @@
 /* eslint-disable import/no-anonymous-default-export */
 import * as React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { Row } from '@mui-treasury/components/flex';
+import {  useHistory } from 'react-router-dom';
+
 import { FormControl, InputLabel } from '@mui/material';
 import LoginModal from '../modals/LoginModal'
 import { MenuItem, Select } from '@mui/material';
-import { Button } from '@material-ui/core';
-import { width } from '@mui/system';
+
+import EditModal from '../modals/EditModal';
 export default ({ logout, changeUser,loggedInUser, setChangeUser, setAuthTokens, setUser, user, refresh }) => {
   const history = useHistory()
 
@@ -22,6 +22,9 @@ export default ({ logout, changeUser,loggedInUser, setChangeUser, setAuthTokens,
     val === 'logout' ?
     logout()
     :
+    // val === 'editUser'?
+    
+  
     history.push(`/${val}`)
   }
 
@@ -75,11 +78,17 @@ export default ({ logout, changeUser,loggedInUser, setChangeUser, setAuthTokens,
                 name="category"
                 autoComplete="cuisine"
             
-              >
-                <MenuItem value={`edit/${loggedInUser.firstName}`}>Edit Account</MenuItem>
-                <MenuItem value="dinner">Dinner</MenuItem>
+              >{
+                loggedInUser.googleUser !=1 &&
+                  <EditModal  setUser={setUser}/>
+              }
+                {
+                  loggedInUser.admin == 1 &&
+                  <MenuItem value="addProduct">Add New Product</MenuItem>
+                }
+                {/* <MenuItem value="dinner">Dinner</MenuItem>
                 <MenuItem value="quick">Quick</MenuItem>
-                <MenuItem value="wineAndDine">Wine</MenuItem>
+                <MenuItem value="wineAndDine">Wine</MenuItem> */}
                 <MenuItem value='returns'>Returns</MenuItem>
                 <MenuItem value='logout'>Log Out</MenuItem>
               </Select>

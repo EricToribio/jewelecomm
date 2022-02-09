@@ -20,7 +20,7 @@ export const NavBar = ({setAuthTokens,loggedInUser, logout, changeUser,setUser,u
                 </div>
                 <Grid>
 
-                <div className=''>
+                <div className='pe-3'>
 
                 {/* <div> */}
                     <NavLinks setAuthTokens={setAuthTokens}

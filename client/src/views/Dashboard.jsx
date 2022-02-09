@@ -1,6 +1,5 @@
 
 import axios from "axios";
-import jwtDecode from "jwt-decode";
 import jwt_decode from "jwt-decode";
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
@@ -22,7 +21,9 @@ export const Dashboard = () => {
       setLoggedInUser({
         email : res.data.user.email,
         firstName : res.data.user.firstName,
-        lastName : res.data.user.lastName
+        lastName : res.data.user.lastName,
+        admin : res.data.user.admin,
+        googleUser : res.data.user.googleUser
       })
     })
     : '')

@@ -9,6 +9,7 @@ class User:
         self.last_name = data['last_name']
         self.email = data['email']
         self.admin = data['admin']
+        self.google_user = data['google_user']
         self.password = data['password']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
@@ -33,6 +34,7 @@ class User:
     def add_user(cls,data):
         print(data)
         user_data = {
+                    **data,
                     'first_name':data['first_name'],
                     'last_name':data['last_name'],
                     'email':data['email'],

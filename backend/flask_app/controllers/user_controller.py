@@ -17,13 +17,10 @@ def logged_in ():
     
     logged_in_user= user_model.User.get_one(id=request.json['sub'])
     print(logged_in_user)
-    return {'user' : {'id' : logged_in_user.id, 'admin' : logged_in_user.admin, 'firstName' : logged_in_user.first_name, 'lastName' : logged_in_user.last_name, 'email' : logged_in_user.email}}
+    return {'user' : {'googleUser' : logged_in_user.google_user, 'id' : logged_in_user.id, 'admin' : logged_in_user.admin,
+    'firstName' : logged_in_user.first_name, 'lastName' : logged_in_user.last_name,
+    'email' : logged_in_user.email}}
 
-@app.route('/logout')
-# @login_required
-def log_out():
-    session.clear()
-    return redirect('/')
 
 @app.post('/api/login')
 @cross_origin()
@@ -56,7 +53,8 @@ def google_login():
             'first_name':request.json['givenName'],
             'last_name':request.json['familyName'],
             'email':request.json['email'],
-            'password':request.json['googleId']
+            'password':request.json['googleId'],
+            'google_user' : True
         }    
         new_user = user_model.User.add_user(data)
         access_token=create_access_token(identity=new_user)
@@ -74,8 +72,11 @@ def register():
     print (validation)
     if validation != "good":
         return {'errors' : validation}
-    print (request.json)
-    new_user = user_model.User.add_user(request.json)
+    data = {
+        **request.json,
+        'google_user' : False
+    }
+    new_user = user_model.User.add_user(data)
     access_token=create_access_token(identity=new_user)
     refresh_token=create_refresh_token(identity=new_user)
     
