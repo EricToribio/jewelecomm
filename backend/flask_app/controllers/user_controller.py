@@ -62,8 +62,6 @@ def google_login():
         
         return {"access_token":access_token,"refresh_token":refresh_token}
 
-    
-    
 
 @app.post('/api/register')
 @cross_origin()

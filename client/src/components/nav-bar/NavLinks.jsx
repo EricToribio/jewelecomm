@@ -3,10 +3,10 @@ import * as React from 'react';
 import {  useHistory } from 'react-router-dom';
 
 import { FormControl, InputLabel } from '@mui/material';
-import LoginModal from '../modals/LoginModal'
+import LoginModal from '../userModals/LoginModal'
 import { MenuItem, Select } from '@mui/material';
 
-import EditModal from '../modals/EditModal';
+import EditModal from '../userModals/EditModal';
 export default ({ logout, changeUser,loggedInUser, setChangeUser, setAuthTokens, setUser, user, refresh }) => {
   const history = useHistory()
 
